@@ -1,10 +1,12 @@
-# Verilog synthesis infrastructure
+# 6424
 
-Yosys-based synthesis and verification setup for your next project.
+## Verilog synthesis infrastructure
+
+Yosys-based synthesis and verification setup for this project.
 
 See **[infrastructure/README.md](infrastructure/README.md)** for usage.
 
-## Layout
+### Layout
 
 - **infrastructure/local-yosys/** — Build and run Yosys (and Verilator) locally; edit `synth.tcl` and `your_design.v`.
 - **infrastructure/docker-yosys/** — Same workflow in Docker; edit `workdir/synth.tcl` and `workdir/your_design.v`.
