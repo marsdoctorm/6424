@@ -1,0 +1,18 @@
+# Build / clone artifacts
+.build-container
+.build-yosys
+.clone-yosys
+.build-verilator
+.clone-verilator
+infrastructure/local-yosys/yosys/
+infrastructure/local-yosys/verilator/
+infrastructure/local-yosys/verilator-install/
+
+# Synthesis outputs
+gate_level_*.v
+*.vcd
+
+# Editor / OS
+*.swp
+*~
+.DS_Store
