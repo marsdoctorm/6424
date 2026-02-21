@@ -20,7 +20,8 @@ if ! command -v iverilog >/dev/null 2>&1; then
 fi
 
 "${IVERILOG_BIN}" -g2012 -s tb_aes_hardened -o build/tb_aes \
-  aes128_core.sv \
+  aes128_core_masked.sv \
+  trng.sv \
   power_noise.sv \
   aes128_hardened_top.sv \
   tb_aes_hardened.sv
