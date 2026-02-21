@@ -5,6 +5,8 @@ hw2.pdf
 # Synthesis outputs
 gate_level_*.v
 *.vcd
+tb
+build
 
 # Editor / OS
 *.swp
