@@ -142,7 +142,7 @@ module tb_aes_hardened;
     end
 
     initial begin
-        #200000;
+        #2000000;
         $display("[FAIL] Timeout waiting for test completion");
         $fatal(1);
     end

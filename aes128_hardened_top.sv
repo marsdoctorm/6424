@@ -19,25 +19,36 @@ module aes128_hardened_top (
     logic busy_ref;
     logic busy_dup;
     logic [127:0] noise_bus;
+    logic [127:0] trng_out;
 
-    aes128_core u_ref (
+    trng u_trng (
+        .clk(clk),
+        .rst_n(rst_n),
+        .enable(1'b1),
+        .latch(start),
+        .rng_out(trng_out)
+    );
+
+    aes128_core_masked u_ref (
         .clk(clk),
         .rst_n(rst_n),
         .start(start),
         .plaintext(plaintext),
         .key(key),
+        .mask(trng_out),
         .fault_inject(1'b0),
         .ciphertext(ct_ref),
         .done(done_ref),
         .busy(busy_ref)
     );
 
-    aes128_core u_dup (
+    aes128_core_masked u_dup (
         .clk(clk),
         .rst_n(rst_n),
         .start(start),
         .plaintext(plaintext),
         .key(key),
+        .mask(trng_out),
         .fault_inject(inject_fault),
         .ciphertext(ct_dup),
         .done(done_dup),
@@ -48,7 +59,7 @@ module aes128_hardened_top (
         .clk(clk),
         .rst_n(rst_n),
         .enable(busy_ref | busy_dup),
-        .seed(key[31:0] ^ plaintext[127:96]),
+        .seed(trng_out[31:0]),
         .noise_bus(noise_bus),
         .noise_activity(noise_activity)
     );
