@@ -8,6 +8,8 @@ module tb_aes_hardened;
     logic [127:0] plaintext;
     logic [127:0] key;
     logic inject_fault;
+    logic [3:0]  fault_round_sel;
+    logic [6:0]  fault_bit_sel;
     logic [127:0] ciphertext;
     logic valid;
     logic busy;
@@ -30,6 +32,8 @@ module tb_aes_hardened;
         .plaintext(plaintext),
         .key(key),
         .inject_fault(inject_fault),
+        .fault_round_sel(fault_round_sel),
+        .fault_bit_sel(fault_bit_sel),
         .ciphertext(ciphertext),
         .valid(valid),
         .busy(busy),
@@ -49,6 +53,8 @@ module tb_aes_hardened;
             key         <= in_key;
             plaintext   <= in_plain;
             inject_fault <= 1'b0;
+            fault_round_sel <= 4'd0;
+            fault_bit_sel   <= 7'd0;
             start       <= 1'b1;
             @(posedge clk);
             start       <= 1'b0;
@@ -83,6 +89,8 @@ module tb_aes_hardened;
             key          <= in_key;
             plaintext    <= in_plain;
             inject_fault <= 1'b1;
+            fault_round_sel <= 4'd5;
+            fault_bit_sel   <= 7'd0;
             start        <= 1'b1;
             @(posedge clk);
             start        <= 1'b0;
@@ -103,6 +111,8 @@ module tb_aes_hardened;
         rst_n        = 1'b0;
         start        = 1'b0;
         inject_fault = 1'b0;
+        fault_round_sel = 4'd0;
+        fault_bit_sel   = 7'd0;
         plaintext    = 128'h0;
         key          = 128'h0;
         vec_count    = 0;

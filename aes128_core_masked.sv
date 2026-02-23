@@ -6,6 +6,8 @@ module aes128_core_masked (
     input  logic [127:0] key,
     input  logic [127:0] mask,
     input  logic         fault_inject,
+    input  logic [3:0]   fault_round_sel,
+    input  logic [6:0]   fault_bit_sel,
     output logic [127:0] ciphertext,
     output logic         done,
     output logic         busy
@@ -213,8 +215,8 @@ module aes128_core_masked (
             new_state = add_round_key(mc_state, new_round_key);
         end
 
-        if (fault_inject && (round_ctr == 4'd5))
-            new_state[0] = ~new_state[0];
+        if (fault_inject && (round_ctr == fault_round_sel) && (fault_bit_sel <= 7'd127))
+            new_state[fault_bit_sel] = ~new_state[fault_bit_sel];
     end
 
     // ---------------------------------------------------------------

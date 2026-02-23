@@ -5,6 +5,8 @@ module aes128_hardened_top (
     input  logic [127:0] plaintext,
     input  logic [127:0] key,
     input  logic         inject_fault,
+    input  logic [3:0]   fault_round_sel,
+    input  logic [6:0]   fault_bit_sel,
     output logic [127:0] ciphertext,
     output logic         valid,
     output logic         busy,
@@ -37,6 +39,8 @@ module aes128_hardened_top (
         .key(key),
         .mask(trng_out),
         .fault_inject(1'b0),
+        .fault_round_sel(4'd0),
+        .fault_bit_sel(7'd0),
         .ciphertext(ct_ref),
         .done(done_ref),
         .busy(busy_ref)
@@ -50,6 +54,8 @@ module aes128_hardened_top (
         .key(key),
         .mask(trng_out),
         .fault_inject(inject_fault),
+        .fault_round_sel(fault_round_sel),
+        .fault_bit_sel(fault_bit_sel),
         .ciphertext(ct_dup),
         .done(done_dup),
         .busy(busy_dup)
