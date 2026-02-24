@@ -1,0 +1,17 @@
+AES-128 Hardened Core — Validation Results
+Date: Sun Feb 22 01:43:18 EST 2026
+Random count: 200  |  Boundary vectors: enabled
+
+Metric                    Value
+------------------------  ----------
+Total vectors generated:  213
+Vectors run in sim:       214
+PASS:                     214
+FAIL:                     0
+Pass rate:                100.00%
+
+Timing
+------------------------  ----------
+Vector generation:        688 ms
+Compilation:              14 ms
+Simulation:               346.31 s
